@@ -40,6 +40,7 @@ function Header(){
         <Navigation>
             <StyledLink to="/">Accueil</StyledLink>
             <StyledLink to="/profil" $isFullLink>Profil</StyledLink>
+            <StyledLink to="/post">Posts</StyledLink>
             <LogoTogether>
                 <LogoNav src={logo} className="Home-logo" alt="logo" />
                 <LogoTitle>Groupomania</LogoTitle>

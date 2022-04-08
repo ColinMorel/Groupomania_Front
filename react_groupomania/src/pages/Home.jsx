@@ -51,7 +51,7 @@ function Home(){
   return (
     <HomeContainer>
       <HomeLogSignDiv>
-        <HomeLoginButton to="/login" onClick={()=>{
+        <HomeLoginButton onClick={()=>{
           if(!isSignUpShown){
             updateIsLoginShown(!isLoginShown)
           }else{
@@ -63,7 +63,7 @@ function Home(){
           Login
         </HomeLoginButton>
         {isLoginShown && <Login/> }
-        <HomeSignUpButton to="/signUp" onClick={()=>{
+        <HomeSignUpButton onClick={()=>{
           if(!isLoginShown){
             updateIsSignUpShown(!isSignUpShown)
           }else{
