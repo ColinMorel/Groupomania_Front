@@ -14,14 +14,13 @@ const EditMain = styled.div`
 const EditHeader = styled.div`
 `
 
-function Edit(){
+function Edit(props){
     return(
-
         <EditPage>
             <Navigation/>
             <EditMain>                
                 <EditHeader>
-                    <h1>Edit du post</h1>
+                    <h1>Edit du post {props.id}</h1>
                 </EditHeader>
             </EditMain>
         </EditPage>   

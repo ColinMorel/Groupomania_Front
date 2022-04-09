@@ -1,6 +1,6 @@
-import Post from '../../components/Post';
 import Navigation from '../../components/Navigation';
 import colors from '../../utils/colors';
+import Edit from './Edit';
 
 import { useState, useEffect } from 'react';
 import React from 'react';
@@ -48,8 +48,15 @@ const PostOnly = styled.div`
     gap:10px;
 `
 
+function newUrl(whichEditPressed){
+    const url = `http://localhost:8000/api/post/${whichEditPressed}`;
+    return  url;
+}
+
 function GetAllPosts(){
     let [postsList, setPostsList] = useState([]);
+    let [whichEditPressed,setWhichEditPressed] = useState(0);
+    let [isEditPressed,setIsEditPressed] = useState([false]);
 
     useEffect(()=>{
         axios({
@@ -62,7 +69,7 @@ function GetAllPosts(){
     },[])
     
     return(
-
+        
         <PostPage>
             <Navigation/>
             <PostMain>                
@@ -74,10 +81,65 @@ function GetAllPosts(){
                     </PostHeaderAdd>
                 </PostHeader>
                 <PostOnly>
-                    {postsList.map((post) => {return Post(post)})}
+                    {postsList.map((post) => (
+                    <PostContainer key={post.id}>
+                        <PostTitle>Post ayant l'Id numéro{post.id}</PostTitle>
+                        <PostImage alt="" src={post.image} />
+                        <PostContent>{post.content}</PostContent>
+                        <PostContainerButtons>
+                            <PostEdit id={post.id} to={newUrl(post.id)} onClick={(e)=>{
+                                setWhichEditPressed(e.currentTarget.id)
+                                if(isEditPressed[whichEditPressed]){
+                                    console.log(whichEditPressed)
+                                    setIsEditPressed(!isEditPressed)
+                                }
+                            }}>
+                                Edit
+                            </PostEdit>{ whichEditPressed == post.id ? <Edit id={post.id}/> : null
+                        }
+                            <PostDelete>Delete</PostDelete>
+                        </PostContainerButtons>
+                    </PostContainer>))}
                 </PostOnly>
             </PostMain>
         </PostPage>       
     )
 }
+
+const PostContainer = styled.div`
+    background-color:${colors.backgroundLight};
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    padding:15px;
+    max-width:30%
+`
+const PostContent = styled.div`
+    background-color:${colors.secondary};
+    padding:10px;
+    
+`
+const PostImage = styled.img`
+    border-radius:15px;
+    padding-bottom:10px;
+`
+const PostTitle = styled.h1`
+    color:${colors.primary}
+`
+const PostContainerButtons = styled.div`
+    display:flex;
+    flex-direction:row;
+    padding:5px;
+    gap:5px;
+    justify-content:end;
+`
+const PostDelete = styled.button`
+    background-color:red;
+    color:white;
+`
+
+const PostEdit = styled.button`
+
+`
+
 export default GetAllPosts
