@@ -14,7 +14,7 @@ const HeaderDiv = styled.nav`
     position:fixed;
     height:5%;
     padding:0px;
-    width:9%;
+    width:fit-content;
     border-radius: 0 0 20px 0;
 
     padding:10px;
@@ -54,25 +54,12 @@ const FullBar = styled.div`
     background-color:${colors.secondary};
     height:7.1%;
 `
-function Header(){
-    const token = JSON.parse(localStorage.getItem("tokenLS"));
-    let [user,setUser] = useState({});
-    useEffect(()=>{
-        axios.get(`http://localhost:8000/api/user/find/${token.userId}`,{
-            headers: {
-              'Authorization': `token ${tokenLS()}`,
-              'Access-Control-Allow-Origin': '*'
-            }
-        })
-        .then((res) => setUser(res.data[0]))
-        .catch(err => console.log("User pas bien recupéré:",err))
-    },[]);
-    
+function HeaderLogPage(){
 
     return(
         <FullBar>
             <HeaderDiv>
-                <NavigationWelcome>Bonjour, {user.firstname}</NavigationWelcome>
+                <NavigationWelcome>Bienvenue</NavigationWelcome>
                 <LogoTogether>
                     <LogoNav src={logo} className="Home-logo" alt="logo" />
                     <LogoTitle>Groupomania</LogoTitle>
@@ -81,4 +68,4 @@ function Header(){
         </FullBar>
     )
 }
-export default Header
+export default HeaderLogPage

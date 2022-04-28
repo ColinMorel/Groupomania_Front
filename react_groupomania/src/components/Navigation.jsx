@@ -7,25 +7,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { faUserNinja } from '@fortawesome/free-solid-svg-icons'
 import { faBook } from '@fortawesome/free-solid-svg-icons'
+import { LightenDarkenColor } from "lighten-darken-color";
 
 
 const StyledLink = styled(Link)`
     padding: 15px;
     display:flex;
-    justify-content:center;
-    font-size: 18px;
+    align-items:center;
     margin:5px;
     padding:10px;
-    background-color:white;
     border-radius:50%;
     `
 const NavigationHeader = styled.div`
     margin:10px;
-    flex-direction:column;
+    display:flex;
+    flex-direction:row;
     width:fit-content;    
-    height:fit-content;
+    height:5%;
+    margin:10px;
+    
     border-radius:20px;
-    background-color:${colors.secondary};
+    background-color:white;
+    position: fixed;
+    left:10%;
 `
 
 
@@ -33,9 +37,9 @@ const NavigationHeader = styled.div`
 function Navigation(){
     return(
         <NavigationHeader>
-            <StyledLink to="/"><FontAwesomeIcon icon={faHouse} size="xl" style={{ color: `${colors.primary}`}} /></StyledLink>
-            <StyledLink to="/profil"><FontAwesomeIcon icon={faUserNinja} size="xl" style={{ color: `${colors.primary}`}} /></StyledLink>
-            <StyledLink to="/posts"><FontAwesomeIcon icon={faBook} size="xl" style={{ color: `${colors.primary}`}} /></StyledLink>
+            {/* <StyledLink style={{backgroundColor:LightenDarkenColor(colors.backgroundLight, 70)}} to="/homepage"><FontAwesomeIcon icon={faHouse} size="lg" style={{ color: `${colors.primary}`}} /></StyledLink> */}
+            <StyledLink style={{backgroundColor:LightenDarkenColor(colors.backgroundLight, 70)}} to="/profil"><FontAwesomeIcon icon={faUserNinja} size="lg" style={{ color: `${colors.primary}`}} /></StyledLink>
+            <StyledLink style={{backgroundColor:LightenDarkenColor(colors.backgroundLight, 70)}} to="/post"><FontAwesomeIcon icon={faBook} size="lg" style={{ color: `${colors.primary}`}} /></StyledLink>
         </NavigationHeader>
 
     )

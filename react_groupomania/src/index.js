@@ -1,31 +1,38 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router,Route,Routes} from 'react-router-dom';
-
 import Header from './components/Header';
-import Home from './pages/Home'
-import Profile from './pages/Profile'
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import LogPage from './pages/LogPage';
+import Profile from './pages/Profile';
 import Posts from './pages/Posts/Posts';
-
+import CreatePost from './pages/Posts/CreatePost';
+import Error from './components/Error';
 import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
-import Edit from './pages/Posts/Edit';
+import EditPost from './pages/Posts/EditPost';
 
-ReactDOM.render(
-  <React.StrictMode>
+// Version 18 de react
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
     <Router>
-      <Header/>
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
-        <Route path="/profil" element={<Profile/>}/>
-        <Route path="/post" element={<Posts/>}/>
-        <Route path="/post/:id" element={<Edit/>}/>
+        <Route exact path="/homepage" element={<HomePage/>}/>
+        <Route exact path="/" element={<LogPage/>}/>
+        <Route exact path="/profil" element={<Profile/>}/>
+        <Route exact path="/post" element={<Posts/>}/>
+        <Route exact path="/post/:id" element={<EditPost/>}/>
+        <Route exact path="/CreatePost" element={<CreatePost/>}/>
+        <Route path="*" element={<Error/>}/>
       </Routes>
-      {/* <Footer/> */}
     </Router>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  </StrictMode>
+  );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
