@@ -6,12 +6,10 @@ import axios from 'axios';
 
 
 const LoginContainer = styled.form`
-position:fixed;
-top:48%;
-left:42%;
+// position:fixed;
+// top:48%;
+// left:42%;
 display:flex;
-width:12%;
-height:fit-content;
 flex-direction:column;
 justify-content:center;
 align-items:center;
@@ -50,8 +48,8 @@ function Login(){
             .then((res) =>{
                 if(res.data.errors){
                     console.log(res)
-                    emailError.innerHTML=res.data.errors.email;
-                    passwordError.innerHTML=res.data.errors.password;
+                    // emailError.innerHTML=res.data.errors.email;
+                    // passwordError.innerHTML=res.data.errors.password;
                 }else{
                     localStorage.setItem("tokenLS",JSON.stringify(res.data));
                     console.log("login effectué avec le token :",res.data.token,"et via l'userid n°",res.data.userId)

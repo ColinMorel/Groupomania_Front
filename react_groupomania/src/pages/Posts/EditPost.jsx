@@ -15,17 +15,15 @@ const EditTitles = styled.div`
     height:fit-content;
 `
 const EditPage = styled.div`
+    background-color:${LightenDarkenColor(colors.backgroundLight, 70)};
     min-height:939px;
     display:flex;
-    flex-direction:row;
-    background-color:${colors.backgroundLight};
+    align-items:center;
+    justify-content:center;
 `
 const EditCard = styled.div`
-    margin: 10% 0 0 40%;
-    max-width:40%;
     width:fit-content;
     height:fit-content;
-    max-height:50%;
     background-color:${colors.backgroundLight};
     border-radius:5%;
     border:2px solid ${colors.primary}
@@ -68,7 +66,7 @@ function EditPost(){
     },[])
 
     return(
-        <EditPage style={{minHeight:'934px',backgroundColor:LightenDarkenColor(colors.backgroundLight, 70)}}>
+        <EditPage>
             <Header/>
             <Navigation/>
             <EditCard>                

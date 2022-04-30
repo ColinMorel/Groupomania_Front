@@ -1,23 +1,22 @@
-import { Link } from "react-router-dom"
 import styled from 'styled-components'
 import colors from '../utils/colors';
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { instance } from '../axios';
 import tokenLS from '../utils/tokenLS'
 
 const ProfileCardMain = styled.div`
 display:flex;
 flex-direction:row;
 position:fixed;
-top:50%;
-left:2%;
-width:200px;
+top:15%;
+left:10%;
+width:300px;
 height:200px;
 `
 const ProfileCardRight = styled.div`
 display:flex;
 flex-direction:column;
-width:50%;
+width:33%;
 `
 const ProfileCardLeft = styled.div`
 width:50%;
@@ -63,12 +62,7 @@ export default function ProfileCard(){
     const token = JSON.parse(localStorage.getItem("tokenLS"));
     let [user,setUser] = useState({});
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/user/find/${token.userId}`,{
-            headers: {
-              'Authorization': `token ${tokenLS()}`,
-              'Access-Control-Allow-Origin': '*'
-            }
-        })
+        instance.get(`/user/find/${token.userId}`)
         .then((res) => setUser(res.data[0]))
         .catch(err => console.log("User pas bien recupéré:",err))
     },[]);

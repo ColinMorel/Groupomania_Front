@@ -6,12 +6,10 @@ import axios from 'axios';
 
 
 const SignUpContainer = styled.form`
-    position:fixed;
-    top:48%;
-    left:42%;
+    // position:fixed;
+    // top:48%;
+    // left:42%;
     display:flex;
-    width:12%;
-    height:fit-content;
     flex-direction:column;
     justify-content:center;
     align-items:center;

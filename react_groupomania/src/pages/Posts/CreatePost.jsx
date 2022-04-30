@@ -3,10 +3,11 @@ import styled from "styled-components"
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header";
+import HeaderPhone from "../../components/HeaderPhone";
 
 import { instance } from "../../axios";
-import colors from "../../utils/colors"
-
+import colors from "../../utils/colors";
+import { useMediaQuery } from 'react-responsive';
 
 const CreatePage = styled.div`
     display:flex;
@@ -22,9 +23,11 @@ const CreateHeader = styled.div`
 const CreateForm = styled.form`
     width:30%;
     display:grid;
-    grid-template-columns:1fr 250px;
+    grid-template-columns:1fr 400px;
     grid-template-row:repeat(5,1fr);
     gap:10px;
+    background-color:${colors.backgroundLight};
+    padding:3%;
 
 ` 
 const CreatethisPost = styled.input`
@@ -36,14 +39,17 @@ const CreatethisPost = styled.input`
 `
 
 function CreatePost(){
-    const [userLS,setUserLS] = useState({});
     
+    const [userLS,setUserLS] = useState({});
     const navigate = useNavigate();
     const token = JSON.parse(localStorage.getItem("tokenLS"));
     useEffect(()=>{
         if(!token){navigate('/');window.location.reload(true);};
         getUserLs();
     },[])
+
+    const isDesktop = useMediaQuery({ query: '(min-width: 1300px)' });
+    const isPhone = useMediaQuery({ query: '(max-width: 1300px)' });
 
     function getUserLs(){
         instance.get(`/user/find/${token.userId}`)
@@ -52,7 +58,7 @@ function CreatePost(){
     }
 
     const [form,setForm] = useState({
-        title:"",
+        // title:"",
         content:"",
         image:""
     })
@@ -68,7 +74,7 @@ function CreatePost(){
         fd.append("image",input.files[0]);
         fd.append("UserId",JSON.parse(localStorage.getItem("tokenLS")).userId);
         fd.append("author",userLS.firstname);
-        fd.append("title",form.title);
+        // fd.append("title",form.title);
         fd.append("content",form.content);
         console.log(input.files[0]);
 
@@ -79,17 +85,18 @@ function CreatePost(){
 
     return(
         <CreatePage>
-            <Header/>
+            {isDesktop && <Header/>}
+            {isPhone && <HeaderPhone/>}
                 <Navigation/>                
                 <CreateHeader>
                     <h1>Création de post</h1>
                     <CreateForm enctype="multipart/form-data" onSubmit={(e)=>FormPostFormData(e)}>
 
-                            <label htmlFor="title" style={{gridColumn:1,gridRow:1}}>Titre du post</label>
-                            <input id="title" type="texte" style={{gridColumn:2,gridRow:1}} onChange={(e)=>formUpdate(e)}/>
+                            {/* <label htmlFor="title" style={{gridColumn:1,gridRow:1}}>Titre du post</label>
+                            <input id="title" type="texte" style={{gridColumn:2,gridRow:1}} onChange={(e)=>formUpdate(e)}/> */}
 
-                            <label htmlFor="content" style={{gridColumn:1,gridRow:2}}>Contenu du post</label>
-                            <textarea id="content" type="texte" onChange={(e)=>formUpdate(e)} style={{display:"overflow-wrap"}}/>
+                            <label htmlFor="content" style={{width:'120px',gridColumn:1,gridRow:1}}>Contenu du post</label>
+                            <textarea id="content" type="texte" onChange={(e)=>formUpdate(e)} style={{display:"overflow-wrap",width:'70%'}}/>
 
                             <label htmlFor="image" style={{marginRight:'5%'}}>Ajouter une image</label>
                             <input id="image" type="file" accept="image/jpg,image/jpeg,image/png"/>

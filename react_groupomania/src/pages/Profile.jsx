@@ -13,9 +13,9 @@ const ProfilePage = styled.div`
     position:fixed; 
     display:flex;
     flex-direction:row;
-    min-height:100%;
+    height:100vh;
     width:100%;
-    background: linear-gradient(70deg, #034949, #3d625b);
+    background: linear-gradient(70deg, #13234a, #3d625b);
     justify-content:center;
 `
 const ProfileCard = styled.div`
@@ -43,7 +43,7 @@ const ProfileRightPart = styled.div`
     width:48%;
 `
 const ProfilePicture = styled.img`
-    width:80%;
+    width:fit-content;
     height:60%;
     object-fit:cover;
     border-radius:25%;
@@ -75,22 +75,25 @@ function Profile (){
     const navigate = useNavigate();
     const token = JSON.parse(localStorage.getItem("tokenLS"));
     useEffect(()=>{if(!token){navigate('/');window.location.reload(true);}})
+    
     let [user,setUser] = useState({});
+    let [bio,setBio] = useState(user.bio);
 
     useEffect(()=>{
-        getUserLs();
+        getCurrentUser();
     },[]);   
 
-    function getUserLs(){
+    function getCurrentUser(){
         instance.get(`/user/find/${token.userId}`)
         .then((res) => setUser(res.data[0]))
         .catch(err => console.log("User pas bien recupéré:",err))
     }
-    function UpdateImage(){
+    function UpdateProfil(){
         var input = document.getElementById('avatar');
         var fd = new FormData();
-        fd.append("image",input.files[0]);       
-        instance.put(`/user/edit/${token.userId}`,fd).then(()=>getUserLs());
+        fd.append("image",input.files[0]);  
+        fd.append("bio",bio);     
+        instance.put(`/user/edit/${token.userId}`,fd).then(getCurrentUser());
     }
     function DeleteProfil(){
         instance.delete(`/user/delete/${token.userId}`)
@@ -112,13 +115,13 @@ function Profile (){
                         <ProfilePicture alt="" src={user.image}/>
                         <br/>
                         <ProfileInputFile id="avatar" type="file"  accept="image/jpg,image/jpeg,image/png"/>
-                        <EditProfil onClick={()=>{UpdateImage()}}>Update Img</EditProfil>
+                        <EditProfil onClick={()=>{UpdateProfil()}}>Update Profil</EditProfil>
                     </ProfileLeftPart>
                     <ProfileRightPart>
                         <label style={{color:colors.primary}}htmlFor='email'>Email</label>
                         <input id="email" readOnly="readonly" value={user.email}></input>
-                        <label style={{paddingTop:'20%',color:colors.primary}} htmlFor='password'>Password</label>
-                        <input  id="password" readOnly="readonly" type="password" value={user.password}></input>
+                        <label style={{paddingTop:'20%',color:colors.primary}} htmlFor='bio'>Bio</label>
+                        <textarea  id="bio"  placeholder={"Rédigez votre biographie"} type="texte" style={{width:'80%',height:'30%'}} onChange={(e)=>{setBio(e.target.value)}}/>
                         {/* <input readOnly="readonly" value={user.lasname}></input>
                         <input readOnly="readonly" value={user.firstname}></input> */}
                         <button className="button-delete-profil" onClick={()=>DeleteProfil()}>Delete User</button>

@@ -8,6 +8,8 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { faUserNinja } from '@fortawesome/free-solid-svg-icons'
 import { faBook } from '@fortawesome/free-solid-svg-icons'
 import { LightenDarkenColor } from "lighten-darken-color";
+import { useMediaQuery } from 'react-responsive'
+
 
 
 const StyledLink = styled(Link)`
@@ -30,6 +32,10 @@ const NavigationHeader = styled.div`
     background-color:white;
     position: fixed;
     left:10%;
+    top:0;
+    @media (max-width: 1300px) {
+        left:58%;
+    }
 `
 
 

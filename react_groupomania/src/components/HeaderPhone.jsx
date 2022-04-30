@@ -13,7 +13,7 @@ const HeaderDiv = styled.nav`
     position:fixed;
     height:5%;
     padding:0px;
-    width:9%;
+    width:50%;
     border-radius: 0 0 20px 0;
 
     padding:10px;
@@ -50,9 +50,9 @@ const FullBar = styled.div`
     top:0;
     width:100%;
     background-color:${colors.secondary};
-    height:7.1%;
+    height:7.3%;
 `
-function Header(){
+function HeaderPhone(){
     const token = JSON.parse(localStorage.getItem("tokenLS"));
     let [user,setUser] = useState({});
     useEffect(()=>{        
@@ -68,10 +68,9 @@ function Header(){
                 <NavigationWelcome>Bonjour, {user.firstname}</NavigationWelcome>
                 <LogoTogether>
                     <LogoNav src={logo} className="Home-logo" alt="logo" />
-                    <LogoTitle>Groupomania</LogoTitle>
                 </LogoTogether>
             </HeaderDiv>
         </FullBar>
     )
 }
-export default Header
+export default HeaderPhone

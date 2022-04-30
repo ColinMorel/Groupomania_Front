@@ -1,7 +1,6 @@
 .Home{
   text-align: center;
 }
-
 .Home-logo {
   height: 40vmin;
   pointer-events: none;
@@ -10,6 +9,14 @@
 @media (prefers-reduced-motion: no-preference) {
   .Home-logo{
     animation: Home-logo-spin infinite 20s linear;
+  }
+}
+@keyframes Home-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -28,14 +35,6 @@
   color: #61dafb;
 }
 
-@keyframes Home-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 
 .button-logs::after,.button-logs::before{
