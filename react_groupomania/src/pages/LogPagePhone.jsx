@@ -23,7 +23,7 @@ function LogPagePhone(){
           <LogPageCard>
             <LogPageButtons>
               <LogPageLoginDiv>
-                <LogPageLoginButton className='button-logs' onClick={()=>{
+                <LogPageLoginButton className='Button-logs' onClick={()=>{
                       if(!isSignUpShown){
                       updateIsLoginShown(!isLoginShown)
                       }else{
@@ -35,7 +35,7 @@ function LogPagePhone(){
                 </LogPageLoginButton>
               </LogPageLoginDiv>
               <LogPageSignDiv>
-                <LogPageSignUpButton className='button-logs' onClick={()=>{
+                <LogPageSignUpButton className='Button-logs' onClick={()=>{
                     if(!isLoginShown){
                     updateIsSignUpShown(!isSignUpShown)
                     }else{
@@ -90,8 +90,6 @@ const LogPageLoginDiv = styled.div`
   flex-direction:column;
   align-items:center;
   `
-const LogPageLoginForm = styled.div`
-`
 const LogPageSignDiv = styled.div`
   width:50%;
 

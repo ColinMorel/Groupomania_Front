@@ -35,9 +35,7 @@
   color: #61dafb;
 }
 
-
-
-.button-logs::after,.button-logs::before{
+.Button-logs::after,.Button-logs::before{
   border:2px solid #fe9680;
   content:"";
   position:absolute;
@@ -49,21 +47,21 @@
   transition: transform 0.3s ease;
 }
 
-.button-logs:hover::after{
+.Button-logs:hover::after{
   transform:translate(-10px,-10px)
 }
-.button-logs:hover::before{
+.Button-logs:hover::before{
   transform:translate(10px,10px)
 }
 
-.button-log-page:hover{
+.Button-log-page:hover{
   border-radius: 10px;
   border:1px solid white;
   color:#fe9680;
   font-weight:600;
 }
 
-.button-delete-profil{
+.Button-delete-profil{
   width:fit-content;
   position:absolute;
   bottom:5%;
@@ -73,7 +71,7 @@
   border:0.3px solid black;
 }
 
-.button-delete-profil:hover{
+.Button-delete-profil:hover{
   background-color:red;
   color:white;
   transition: ease 0.3s;

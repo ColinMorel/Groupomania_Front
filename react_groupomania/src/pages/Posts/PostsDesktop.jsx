@@ -1,17 +1,15 @@
 import colors from '../../utils/colors';
 import {instance} from '../../axios';
-
 import styled from 'styled-components';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom" //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
+import { Link } from "react-router-dom"; //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
 import { useNavigate } from 'react-router-dom';
 import { LightenDarkenColor } from 'lighten-darken-color';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons' 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function PostsDesktop(){
-
     const navigate = useNavigate();
     const token = JSON.parse(localStorage.getItem("tokenLS"));
     let [postsList, setPostsList] = useState([]);
@@ -32,7 +30,7 @@ function PostsDesktop(){
     
     function deletePost(post){
         if(post.UserId===token.userId || currentUser.administrator){
-            instance.delete(`/post/delete/${post.id}`).then(() => {
+            instance.delete(`/post/delete/${post.id}`).then(()=>{
                     console.log(`Post ayant l'id ${post.id} bien supprimé!`);
                     window.location='/post';
                 })
@@ -69,7 +67,7 @@ function PostsDesktop(){
     }
 
     return(
-        <PostDesktop>
+        <>
             <PostHeader>
                 <PostHeaderAdd>
                     <h2>Créer un post</h2>
@@ -97,8 +95,8 @@ function PostsDesktop(){
                                     ):(null)}
                                 {currentUser.id===post.UserId || currentUser.administrator ?(
                                     <PostButtons>
-                                        <PostEdit onClick={()=>{navigate(`/post/id?${post.id}`)}}>Edit</PostEdit>
-                                        <PostDelete onClick={()=>deletePost(post)}>Delete</PostDelete>
+                                        <PostEdit alt="edit_post" onClick={()=>{navigate(`/post/id?${post.id}`)}}>Edit</PostEdit>
+                                        <PostDelete alt ="delete_post" onClick={()=>deletePost(post)}>Delete</PostDelete>
                                     </PostButtons>
                                     ):(null)
                                 }
@@ -112,21 +110,16 @@ function PostsDesktop(){
                                         <ComContent>{com.content}</ComContent>
                                     </ComLeft>
                                     {currentUser.id===com.UserId || currentUser.administrator ?(
-                                    <ComDelete onClick={()=>deleteCom(com)}><FontAwesomeIcon icon={faTrash} size="lg" style={{ padding:'20%'}} /></ComDelete>):(null)}
-                                    {/* <ComDelete onClick={()=>console.log(com)}><FontAwesomeIcon icon={faTrash} size="lg" style={{ padding:'20%'}} /></ComDelete> */}
+                                    <ComDelete aria-label="delete" alt="delete" type="button" name="delete_com" onClick={()=>deleteCom(com)}><FontAwesomeIcon aria-label="delete" alt="delete" icon={faTrash} size="lg" style={{ padding:'20%'}} /></ComDelete>):(null)}
                                 </ComContainer>
                             ))}                                    
                         </ComOnly>
                     </PostAndCom>
                 ))}
             </PostsColumn>
-        </PostDesktop>
-        
+        </>        
     )
 }
-
-const PostDesktop = styled.div`
-`
 const ComContainer = styled.div`
     background-color:${colors.secondary};
     padding: 0 3%;
@@ -140,18 +133,20 @@ const ComContainer = styled.div`
 const ComLeft = styled.div`
 `
 const ComAuthor = styled.div`
-    color:${colors.primary};
+    color: black;
+    width:fit-content;
+    background-color:white;
+    border-radius:20%;
     height:fit-content;
     margin-right:5%;
+    margin-top:5%;
     padding:3px;
 `
 const ComContent = styled.div`
     padding:10px;
-    width:fit-content;
-   
+    width:fit-content;   
 `
-const ComDelete = styled.button`
-    
+const ComDelete = styled.button`    
     display:flex;
     align-items:center;
     justify-content:center;
@@ -159,16 +154,12 @@ const ComDelete = styled.button`
     height:fit-content;
     background-color:${LightenDarkenColor(colors.primary,60)};
     border-radius:30px;
-    border:1px solid ;
-    border-top:2px solid ${colors.secondary};
+    border:1px solid;
 `
-
 const AddComDiv = styled.div`
     display:flex;
     flex-direction:row;
 `
-
-
 const PostAndCom = styled.div`
     border-radius:20px;
     padding:15px;
@@ -192,7 +183,6 @@ const PostOnly = styled.div`
     border-radius:20px;
     margin-bottom:10px;
     border-top:2px solid ${colors.secondary};
-
 `
 const ComOnly = styled.div`
     display:flex;
@@ -200,29 +190,10 @@ const ComOnly = styled.div`
     align-items:center;
     gap:10px;
 `
-
-const PostH1 = styled.h1`
-    position:absolute;
-    top:0;
-    left:44%;
-    color:${colors.primary}
-`
-const MainDiv = styled.div`
-    padding-top:5%;
-    padding-bottom:5%;
-`
-const PostPage = styled.div`
-    height:100%;
-`
-
 const PostAuthor = styled.h2`
     font-size:1.3em;
     font-style:italic;
     width:fit-content;
-`
-const PostMain = styled.div`
-    padding:0;
-    width:100%;
 `
 const PostHeader = styled.div`
 `
@@ -239,11 +210,8 @@ const PostsColumn = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:10px;
-    
+    gap:10px;    
 `
-
-
 const PostContent = styled.div`
     padding:10px;
     
@@ -259,7 +227,7 @@ const PostImage = styled.img`
 
 `
 const PostTitle = styled.h1`
-    color:${colors.primary};
+    color:black;
     margin:0px;
 `
 const PostContainerButtons = styled.div`
@@ -274,10 +242,9 @@ const PostAddCom = styled.button`
     border-radius:5px;
     border:1px solid ${LightenDarkenColor(colors.secondary,20)};
 `
-    const ComPost = styled.button`
-        border-radius:5px;
-    `
-
+const ComPost = styled.button`
+    border-radius:5px;
+`
 const PostButtons = styled.div`
     margin-right:5%;
     display:flex;
@@ -285,14 +252,11 @@ const PostButtons = styled.div`
     gap:5%;
 `
 const PostDelete = styled.button`
-    background-color:red;
+    background-color:black;
     color:white;
     border-radius:5px;
-    border:1px solid ${LightenDarkenColor(colors.secondary,20)};
-
-
+    border:1px solid black;
 `
-
 const PostEdit = styled.button`
     color:black;
     text-decoration:none; 
@@ -303,7 +267,6 @@ const PostEdit = styled.button`
     border-radius:5px;
     padding:5px;
 `
-
 const PostCreate = styled(Link)`
     display:flex;
     justify-content:center;
@@ -316,7 +279,8 @@ const PostCreate = styled(Link)`
     margin-top:4px;
     margin-left:10px;
     border-radius: 50%;
-    background-color: ${colors.backgroundLight} ;
+    background-color: black ;
+    color:white;
 `
 
 export default PostsDesktop

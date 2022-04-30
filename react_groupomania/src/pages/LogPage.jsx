@@ -1,13 +1,13 @@
 import '../styles/Home.css';
 import styled from 'styled-components';
 import colors from '../utils/colors';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LightenDarkenColor } from 'lighten-darken-color';
 import HeaderLogPage from '../components/HeaderLogPage';
 import LogPageDesktop from './LogPageDesktop';
 import LogPagePhone from './LogPagePhone';
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
 
 const LogPageContainer = styled.div`
   width:100%;
@@ -21,7 +21,6 @@ const LogPageMain = styled.div`
 background-color:${LightenDarkenColor(colors.backgroundLight,60)};
 `
 
-
 function LogPage(){
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("tokenLS"));
@@ -29,7 +28,7 @@ function LogPage(){
   const isDesktop = useMediaQuery({ query: '(min-width: 1300px)' });
   const isPhone = useMediaQuery({ query: '(max-width: 1224px)' })
 
-  return (
+  return(
     <LogPageMain>
       <HeaderLogPage/>
       <LogPageContainer>
@@ -37,18 +36,7 @@ function LogPage(){
         {isDesktop && <LogPageDesktop/>}        
       </LogPageContainer>
     </LogPageMain>
-
   )
 }
 
 export default LogPage;
-
-/*
-<LogPageMain>
-      <HeaderLogPage/>
-      <LogPageContainer>
-        { {isDesktopOrPhone && <LogPagePhone/>} }
-        {isDesktop && <LogPageDesktop/>}        
-      </LogPageContainer>
-    </LogPageMain>
-*/

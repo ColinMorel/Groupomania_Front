@@ -17,7 +17,6 @@ const HomeContainer = styled.div`
 const HomeProfil = styled.div`
   display:flex;
   flex-wrap: wrap;
-
   border-right:1px solid green;
   background-color:${colors.primary};
   height:100%;

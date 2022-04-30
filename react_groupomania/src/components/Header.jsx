@@ -1,10 +1,9 @@
 import logo from '../img/icon-black.png';
-import { Link } from "react-router-dom" //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
-import styled from 'styled-components'
+import { Link } from "react-router-dom"; //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
+import styled from 'styled-components';
 import colors from '../utils/colors';
 import { instance } from '../axios';
 import { useState,useEffect } from 'react';
-
 
 const HeaderDiv = styled.nav`
     display:flex;
@@ -19,7 +18,6 @@ const HeaderDiv = styled.nav`
     padding:10px;
     background-color:${colors.backgroundLight};
 `
-
 const StyledLink = styled(Link)`
     padding: 15px;
     color: white;
@@ -31,7 +29,6 @@ const LogoNav = styled.img`
     width:30px;
     height:30px;
 `
-
 const LogoTitle = styled.h1`
     padding-left:10px;
 `
@@ -59,15 +56,14 @@ function Header(){
         instance.get(`/user/find/${token.userId}`)
         .then((res) => setUser(res.data[0]))
         .catch(err => console.log("User pas bien recupéré:",err))
-    },[]);
-    
+    },[]);    
 
     return(
         <FullBar>
             <HeaderDiv>
                 <NavigationWelcome>Bonjour, {user.firstname}</NavigationWelcome>
                 <LogoTogether>
-                    <LogoNav src={logo} className="Home-logo" alt="logo" />
+                    <LogoNav src={logo} className="Home-logo" alt="logo_groupomania" />
                     <LogoTitle>Groupomania</LogoTitle>
                 </LogoTogether>
             </HeaderDiv>

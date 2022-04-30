@@ -1,7 +1,7 @@
 import '../styles/Home.css';
 import styled from 'styled-components';
 import colors from '../utils/colors';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 
@@ -48,11 +48,10 @@ function SignUp(){
         e.preventDefault();
             axios.post('http://localhost:8000/api/user/signup',data)
                 .then(() => {
-                    console.log("Signup successful:");
                     alert('Compte crée, veuillez vous logger.')
                     window.location = '/';
                 })
-                .catch(err => console.log(err));
+                .catch(err => alert(err));
                 
     }
     return(
@@ -60,24 +59,20 @@ function SignUp(){
             <SignUpDivs style={{paddingTop:10}}>
                 <label htmlFor='email' style={{'paddingRight':10}}>Email</label>
                 <input  id="email" type="email" style={{fontSize:'0.8em',width:'80%'}}onChange={(e) => dataUpdate(e)}/>
-                <div></div>
             </SignUpDivs>
             <SignUpDivs>
                 <label htmlFor='password' style={{'paddingRight':10}}>Mot de passe</label>
                 <input id="password" type="password" style={{fontSize:'0.8em',width:'80%'}}onChange={(e) => dataUpdate(e)}/>
-                <div></div>
             </SignUpDivs>     
             <SignUpDivs>
                 <label htmlFor='lastname' style={{'paddingRight':10}}>Nom</label>
                 <input id="lastname" type="textearea" style={{fontSize:'0.8em',width:'80%'}}onChange={(e) => dataUpdate(e)}/>
-                <div></div>
             </SignUpDivs>    
             <SignUpDivs>
                 <label htmlFor='firstname'style={{'paddingRight':10}}>Prénom</label>
                 <input id="firstname" type="texte" style={{fontSize:'0.8em',width:'80%'}}onChange={(e) => dataUpdate(e)}/>
-                <div></div>
             </SignUpDivs>    
-            <SignUpConnect className='button-log-page' value="Créer un compte" type="submit"/>
+            <SignUpConnect className='Button-log-page' value="Créer un compte" type="submit"/>
         </SignUpContainer>
     )
 }

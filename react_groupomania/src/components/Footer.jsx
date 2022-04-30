@@ -1,21 +1,17 @@
-import { Link } from "react-router-dom" //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
-import styled from 'styled-components'
+import { Link } from "react-router-dom"; //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
+import styled from 'styled-components';
 import colors from '../utils/colors';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 const StyledLink = styled(Link)`
     width:20px;
     height:20px;
     padding: 15px;
-
     display:flex;
     justify-content:center;
     align-items:center;
     font-size: 18px;
-    
     border-radius:50%;
     margin:5px;
     padding:10px;
@@ -37,7 +33,7 @@ function Footer(){
     }
     return(
         <FooterHeader>
-            <StyledLink to="/" onClick={()=>{Disconnect()}}><FontAwesomeIcon icon={faPowerOff} size="xl" style={{ color: `${colors.primary}`}} /></StyledLink>
+            <StyledLink to="/" onClick={()=>{Disconnect()}}><FontAwesomeIcon alt="disconnect" icon={faPowerOff} size="xl" style={{ color: `${colors.primary}`}} /></StyledLink>
         </FooterHeader>
     )
 }

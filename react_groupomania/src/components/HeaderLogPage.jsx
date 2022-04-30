@@ -1,11 +1,7 @@
 import logo from '../img/icon-black.png';
-import { Link } from "react-router-dom" //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
-import styled from 'styled-components'
+import { Link } from "react-router-dom"; //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
+import styled from 'styled-components';
 import colors from '../utils/colors';
-import tokenLS from '../utils/tokenLS';
-import axios from 'axios';
-import { useState,useEffect } from 'react';
-
 
 const HeaderDiv = styled.nav`
     display:flex;
@@ -16,11 +12,9 @@ const HeaderDiv = styled.nav`
     padding:0px;
     width:fit-content;
     border-radius: 0 0 20px 0;
-
     padding:10px;
     background-color:${colors.backgroundLight};
 `
-
 const StyledLink = styled(Link)`
     padding: 15px;
     color: white;
@@ -32,7 +26,6 @@ const LogoNav = styled.img`
     width:30px;
     height:30px;
 `
-
 const LogoTitle = styled.h1`
     padding-left:10px;
 `
@@ -55,7 +48,6 @@ const FullBar = styled.div`
     height:7.1%;
 `
 function HeaderLogPage(){
-
     return(
         <FullBar>
             <HeaderDiv>

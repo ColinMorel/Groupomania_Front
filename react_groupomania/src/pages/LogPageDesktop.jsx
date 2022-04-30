@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LightenDarkenColor } from 'lighten-darken-color';
 
-
 function LogPageDesktop(){
 
     const navigate = useNavigate();
@@ -22,7 +21,7 @@ function LogPageDesktop(){
         <LogPageDesktopMain>
           <LogPageDesktopButtons>
             <LogPageLoginDiv>
-                <LogPageLoginButton className='button-logs' onClick={()=>{
+                <LogPageLoginButton className='Button-logs' onClick={()=>{
                     if(!isSignUpShown){
                     updateIsLoginShown(!isLoginShown)
                     }else{
@@ -34,7 +33,7 @@ function LogPageDesktop(){
                 </LogPageLoginButton>
             </LogPageLoginDiv>
             <LogPageSignDiv>
-                <LogPageSignUpButton className='button-logs' onClick={()=>{
+                <LogPageSignUpButton className='Button-logs' onClick={()=>{
                     if(!isLoginShown){
                     updateIsSignUpShown(!isSignUpShown)
                     }else{
@@ -63,7 +62,6 @@ justify-content:center;
 gap:5%;
 width:100%;
 `
-
 const LogPageDesktopMain = styled.div`
   width:fit-content;
   height:fit-content;

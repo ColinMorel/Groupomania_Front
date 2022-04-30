@@ -1,11 +1,11 @@
-import Navigation from "../../components/Navigation"
-import Header from "../../components/Header"
-import Footer from "../../components/Footer"
-import styled from "styled-components"
-import { useEffect, useState } from "react"
-import { instance } from "../../axios"
-import colors from "../../utils/colors"
-import { LightenDarkenColor } from "lighten-darken-color"
+import Navigation from "../../components/Navigation";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { instance } from "../../axios";
+import colors from "../../utils/colors";
+import { LightenDarkenColor } from "lighten-darken-color";
 
 const EditTitles = styled.div`
     display:flex;
@@ -53,11 +53,9 @@ const EditContent = styled.input`
 function EditPost(){
     let [post,setPost] = useState([]);
     let url = new URL(document.location);
-    // let id = params.get("id");
     let id = url.search;
     id = id.split('?')[1];
-    console.log(id);
-
+    
     function getPostById(){
         instance.get(`/post/find/${id}`).then((response)=>{setPost(response.data)})
     }

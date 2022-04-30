@@ -1,35 +1,28 @@
 import colors from '../../utils/colors';
 import {instance} from '../../axios';
-
 import styled from 'styled-components';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom" //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
+import { Link } from "react-router-dom"; //Link se comporte comme une balise anchor. A utiliser quand on souhaite naviguer pour l'accessibilité de l'app
 import { useNavigate } from 'react-router-dom';
 import { LightenDarkenColor } from 'lighten-darken-color';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons' 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function PostsDesktop(){
-
     const navigate = useNavigate();
     const token = JSON.parse(localStorage.getItem("tokenLS"));
-    let [userList,setUserList] = useState([]);
     let [postsList, setPostsList] = useState([]);
     let [currentUser,setCurrentUser] = useState({});
 
     function getAllPost(){
         instance.get('/post/find/all').then((response)=>{setPostsList(response.data)})
-    }    
-    function getAllUser(){
-        instance.get(`/user/find/all`).then((response)=>{console.log(response.data);setUserList(response.data)});
     }
     function userLS(){
         instance.get(`/user/find/${token.userId}`).then((response)=>{setCurrentUser(response.data[0])});
     }
     useEffect(()=>{
         getAllPost();
-        getAllUser();
         userLS();
     },[]);
 
@@ -124,16 +117,14 @@ function PostsDesktop(){
                                         <ComContent>{com.content}</ComContent>
                                     </ComLeft>
                                     {currentUser.id===com.UserId || currentUser.administrator ?(
-                                    <ComDelete onClick={()=>deleteCom(com)}><FontAwesomeIcon icon={faTrash} size="lg" style={{ padding:'20%'}} /></ComDelete>):(null)}
-                                    {/* <ComDelete onClick={()=>console.log(com)}><FontAwesomeIcon icon={faTrash} size="lg" style={{ padding:'20%'}} /></ComDelete> */}
+                                    <ComDelete type="button" name="delete_com" onClick={()=>deleteCom(com)}><FontAwesomeIcon icon={faTrash} size="lg" style={{ padding:'20%'}} /></ComDelete>):(null)}
                                 </ComContainer>
                             ))}                                    
                         </ComOnly>
                     </PostAndCom>
                 ))}
             </PostsColumn>
-        </>
-        
+        </>        
     )
 }
 
@@ -173,13 +164,10 @@ const ComDelete = styled.button`
     border:1px solid ;
     border-top:2px solid ${colors.secondary};
 `
-
 const AddComDiv = styled.div`
     display:flex;
     flex-direction:row;
 `
-
-
 const PostAndCom = styled.div`
     border-radius:20px;
     padding:15px;
@@ -250,8 +238,6 @@ const PostsColumn = styled.div`
     gap:10px;
     
 `
-
-
 const PostContent = styled.div`
     padding:10px;
     
@@ -267,7 +253,7 @@ const PostImage = styled.img`
 
 `
 const PostTitle = styled.h1`
-    color:${colors.primary};
+    color:#13234a;
     margin:0px;
 `
 const PostContainerButtons = styled.div`
@@ -297,10 +283,7 @@ const PostDelete = styled.button`
     color:white;
     border-radius:5px;
     border:1px solid ${LightenDarkenColor(colors.secondary,20)};
-
-
 `
-
 const PostEdit = styled.button`
     color:black;
     text-decoration:none; 
@@ -311,7 +294,6 @@ const PostEdit = styled.button`
     border-radius:5px;
     padding:5px;
 `
-
 const PostCreate = styled(Link)`
     display:flex;
     justify-content:center;
@@ -325,7 +307,7 @@ const PostCreate = styled(Link)`
     padding-bottom:1px;
     margin-left:10px;
     border-radius: 50%;
-    background-color: ${colors.backgroundLight} ;
+    background-color: black ;
+    color:white;
 `
-
 export default PostsDesktop

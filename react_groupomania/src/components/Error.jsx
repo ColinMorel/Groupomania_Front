@@ -2,10 +2,6 @@ import '../styles/Home.css';
 import styled from 'styled-components';
 import colors from '../utils/colors';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSadTear } from '@fortawesome/free-solid-svg-icons'
-
-
 
 const ErrorContainer = styled.div`
 display:flex;

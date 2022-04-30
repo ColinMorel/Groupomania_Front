@@ -4,7 +4,6 @@ import colors from '../utils/colors';
 import { useState } from 'react';
 import axios from 'axios';
 
-
 const LoginContainer = styled.form`
 // position:fixed;
 // top:48%;
@@ -37,28 +36,26 @@ function Login(){
 
     function handleLogin(e){
         e.preventDefault();
-        const emailError = document.querySelector('.email_error');
-        const passwordError = document.querySelector('.password_error');
+        // const emailError = document.querySelector('.email_error');
+        // const passwordError = document.querySelector('.password_error');
 
-        // console.log(e.target.email.value,e.target.password.value)
+ 
         axios.post('http://localhost:8000/api/user/login',{
             email:e.target.email.value,
             password:e.target.password.value,
         })
             .then((res) =>{
                 if(res.data.errors){
-                    console.log(res)
+                    alert(res)
                     // emailError.innerHTML=res.data.errors.email;
                     // passwordError.innerHTML=res.data.errors.password;
                 }else{
                     localStorage.setItem("tokenLS",JSON.stringify(res.data));
-                    console.log("login effectué avec le token :",res.data.token,"et via l'userid n°",res.data.userId)
                     window.location = '/post';
                 }
             })
-            .catch(err => console.log("Erreur post",err));
+            .catch(err => alert("Erreur post",err));
     }
-
 
     return(
         <LoginContainer onSubmit={(e)=>handleLogin(e)} id="sign-up-form">
@@ -72,7 +69,7 @@ function Login(){
                 <input id="password" type="password" style={{fontSize:'0.8em',width:'80%'}}onChange={(e) => setPassword(e.target.value)} value={password}/>
                 <div className="password_error" style={{color:"red"}}></div>
             </LoginDivs>     
-            <LoginConnect className='button-log-page' type="submit" value="Connect"/>
+            <LoginConnect className='Button-log-page' type="submit" value="Connect"/>
         </LoginContainer>
     )
 }
