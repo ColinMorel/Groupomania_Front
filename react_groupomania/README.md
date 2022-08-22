@@ -5,8 +5,11 @@ Création d'un reseau social d'entreprise, from scratch, ayant pour but de facil
 Ce site avait donc besoin des fonctionnalités suivantes :
  
  -Création & utilisation d'une database (mySQL).
+ 
  -Création de posts (texte + titre) avec ajout d'images.
+ 
  -Réaction via commentaire, aux différents posts.
+ 
  -Création d'un profil administrateur, pouvant supprimer tout les posts/commentaires (autrement seul les créateurs des posts ont accès à la suppression).
 
 # Getting Started
