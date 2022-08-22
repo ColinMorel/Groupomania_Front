@@ -1,4 +1,4 @@
-# Groupomania_Front project
+# Groupomania_Front 
 
 Création d'un reseau social d'entreprise, from scratch, ayant pour but de faciliter les interactions au sein de l'entreprise.
 
